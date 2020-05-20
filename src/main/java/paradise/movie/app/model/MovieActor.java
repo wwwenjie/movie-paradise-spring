@@ -1,16 +1,16 @@
 package paradise.movie.app.model;
 
-public class MovieActorKey {
+public class MovieActor {
     private Integer movieId;
 
     private Integer actorId;
 
-    public MovieActorKey(Integer movieId, Integer actorId) {
+    public MovieActor(Integer movieId, Integer actorId) {
         this.movieId = movieId;
         this.actorId = actorId;
     }
 
-    public MovieActorKey() {
+    public MovieActor() {
         super();
     }
 

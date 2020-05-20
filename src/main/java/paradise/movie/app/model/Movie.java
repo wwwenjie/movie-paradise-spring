@@ -23,6 +23,16 @@ public class Movie {
 
     private Date updateTime;
 
+    private String info;
+
+    private String rating;
+
+    private String recs;
+
+    private String trailers;
+
+    private String backdrops;
+
     public Movie(Integer id, String imdbId, String title, String titleEn, Integer year, Date release, String poster, String path, Date createTime, Date updateTime) {
         this.id = id;
         this.imdbId = imdbId;
@@ -34,6 +44,24 @@ public class Movie {
         this.path = path;
         this.createTime = createTime;
         this.updateTime = updateTime;
+    }
+
+    public Movie(Integer id, String imdbId, String title, String titleEn, Integer year, Date release, String poster, String path, Date createTime, Date updateTime, String info, String rating, String recs, String trailers, String backdrops) {
+        this.id = id;
+        this.imdbId = imdbId;
+        this.title = title;
+        this.titleEn = titleEn;
+        this.year = year;
+        this.release = release;
+        this.poster = poster;
+        this.path = path;
+        this.createTime = createTime;
+        this.updateTime = updateTime;
+        this.info = info;
+        this.rating = rating;
+        this.recs = recs;
+        this.trailers = trailers;
+        this.backdrops = backdrops;
     }
 
     public Movie() {
@@ -118,5 +146,45 @@ public class Movie {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public String getInfo() {
+        return info;
+    }
+
+    public void setInfo(String info) {
+        this.info = info == null ? null : info.trim();
+    }
+
+    public String getRating() {
+        return rating;
+    }
+
+    public void setRating(String rating) {
+        this.rating = rating == null ? null : rating.trim();
+    }
+
+    public String getRecs() {
+        return recs;
+    }
+
+    public void setRecs(String recs) {
+        this.recs = recs == null ? null : recs.trim();
+    }
+
+    public String getTrailers() {
+        return trailers;
+    }
+
+    public void setTrailers(String trailers) {
+        this.trailers = trailers == null ? null : trailers.trim();
+    }
+
+    public String getBackdrops() {
+        return backdrops;
+    }
+
+    public void setBackdrops(String backdrops) {
+        this.backdrops = backdrops == null ? null : backdrops.trim();
     }
 }

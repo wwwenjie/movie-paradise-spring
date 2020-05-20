@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="paradise.movie.app.dao.MovieActorDao">
-  <resultMap id="BaseResultMap" type="paradise.movie.app.model.MovieActorKey">
+  <resultMap id="BaseResultMap" type="paradise.movie.app.model.MovieActor">
     <constructor>
       <idArg column="movie_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <idArg column="actor_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
@@ -82,7 +82,7 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="paradise.movie.app.model.MovieActorKey">
+  <delete id="deleteByPrimaryKey" parameterType="map">
     delete from movie_actor
     where movie_id = #{movieId,jdbcType=INTEGER}
       and actor_id = #{actorId,jdbcType=INTEGER}
@@ -93,11 +93,11 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="paradise.movie.app.model.MovieActorKey">
+  <insert id="insert" parameterType="paradise.movie.app.model.MovieActor">
     insert into movie_actor (movie_id, actor_id)
     values (#{movieId,jdbcType=INTEGER}, #{actorId,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="paradise.movie.app.model.MovieActorKey">
+  <insert id="insertSelective" parameterType="paradise.movie.app.model.MovieActor">
     insert into movie_actor
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="movieId != null">

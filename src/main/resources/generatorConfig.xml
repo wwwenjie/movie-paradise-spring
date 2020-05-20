@@ -7,7 +7,7 @@
   <!-- load jdbc.properties -->
   <properties resource="application.properties"/>
 
-  <context id="default" targetRuntime="MyBatis3">
+  <context id="default" targetRuntime="MyBatis3" defaultModelType="flat">
     <property name="autoDelimitKeywords" value="true"/>
     <property name="beginningDelimiter" value="`"/>
     <property name="endingDelimiter" value="`"/>
