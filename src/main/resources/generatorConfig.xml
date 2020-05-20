@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+    PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+    "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+  <!-- load jdbc.properties -->
+  <properties resource="application.properties"/>
+
+  <context id="default" targetRuntime="MyBatis3">
+    <property name="autoDelimitKeywords" value="true"/>
+    <property name="beginningDelimiter" value="`"/>
+    <property name="endingDelimiter" value="`"/>
+    <!--when suppress all comments, add this plugin to overwrite xml-->
+    <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin"/>
+
+    <commentGenerator>
+      <property name="suppressAllComments" value="true"/>
+    </commentGenerator>
+
+    <jdbcConnection
+        connectionURL="${spring.datasource.url}"
+        driverClass="${spring.datasource.driverClassName}"
+        userId="${spring.datasource.username}"
+        password="${spring.datasource.password}">
+      <property name="nullCatalogMeansCurrent" value="true"/>
+    </jdbcConnection>
+
+    <javaTypeResolver>
+      <property name="forceBigDecimals" value="false"/>
+    </javaTypeResolver>
+
+    <javaModelGenerator targetPackage="paradise.movie.app.model"
+                        targetProject="src/main/java">
+      <property name="enableSubPackages" value="false"/>
+      <property name="constructorBased" value="true"/>
+      <property name="trimStrings" value="true"/>
+      <property name="immutable" value="false"/>
+    </javaModelGenerator>
+
+    <sqlMapGenerator targetPackage="mapper"
+                     targetProject="src/main/resources">
+      <property name="enableSubPackages" value="false"/>
+    </sqlMapGenerator>
+
+    <javaClientGenerator targetPackage="paradise.movie.app.dao"
+                         targetProject="src/main/java" type="XMLMAPPER">
+      <property name="enableSubPackages" value="true"/>
+    </javaClientGenerator>
+
+    <table tableName="movie" mapperName="MovieDao"/>
+    <table tableName="genre" mapperName="GenreDao"/>
+    <table tableName="actor" mapperName="ActorDao"/>
+    <table tableName="movie_genre" mapperName="MovieGenreDao"/>
+    <table tableName="movie_actor" mapperName="MovieActorDao"/>
+  </context>
+</generatorConfiguration>
