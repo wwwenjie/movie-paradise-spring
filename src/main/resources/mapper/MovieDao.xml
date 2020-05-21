@@ -3,433 +3,104 @@
 <mapper namespace="paradise.movie.app.dao.MovieDao">
   <resultMap id="BaseResultMap" type="paradise.movie.app.model.Movie">
     <constructor>
-      <idArg column="_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="imdb_id" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="title" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="title_en" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="year" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="release" javaType="java.util.Date" jdbcType="TIMESTAMP" />
-      <arg column="poster" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="path" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
-      <arg column="update_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <idArg column="_id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+      <arg column="imdb_id" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <arg column="title" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <arg column="title_en" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <arg column="year" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+      <arg column="release" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+      <arg column="poster" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <arg column="path" javaType="java.lang.String" jdbcType="VARCHAR"/>
+      <arg column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+      <arg column="update_time" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+      <arg column="info" javaType="java.lang.String" jdbcType="LONGVARCHAR"/>
+      <arg column="rating" javaType="java.lang.String" jdbcType="LONGVARCHAR"/>
+      <arg column="recs" javaType="java.lang.String" jdbcType="LONGVARCHAR"/>
+      <arg column="trailers" javaType="java.lang.String" jdbcType="LONGVARCHAR"/>
+      <arg column="backdrops" javaType="java.lang.String" jdbcType="LONGVARCHAR"/>
     </constructor>
   </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="paradise.movie.app.model.Movie">
-    <constructor>
-      <idArg column="_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="imdb_id" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="title" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="title_en" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="year" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="release" javaType="java.util.Date" jdbcType="TIMESTAMP" />
-      <arg column="poster" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="path" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
-      <arg column="update_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
-      <arg column="info" javaType="java.lang.String" jdbcType="LONGVARCHAR" />
-      <arg column="rating" javaType="java.lang.String" jdbcType="LONGVARCHAR" />
-      <arg column="recs" javaType="java.lang.String" jdbcType="LONGVARCHAR" />
-      <arg column="trailers" javaType="java.lang.String" jdbcType="LONGVARCHAR" />
-      <arg column="backdrops" javaType="java.lang.String" jdbcType="LONGVARCHAR" />
-    </constructor>
-  </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
   <sql id="Base_Column_List">
-    _id, imdb_id, title, title_en, `year`, `release`, poster, `path`, create_time, update_time
+    _id, imdb_id, title, title_en, `year`, `release`, poster, `path`, create_time, update_time, info, rating, recs, trailers, backdrops
   </sql>
-  <sql id="Blob_Column_List">
-    info, rating, recs, trailers, backdrops
-  </sql>
-  <select id="selectByExampleWithBLOBs" parameterType="paradise.movie.app.model.MovieExample" resultMap="ResultMapWithBLOBs">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from movie
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
+
+  <select id="getToday" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM movie
+    WHERE `release` <![CDATA[ < ]]> now()
+    ORDER BY `release` DESC
+    LIMIT 500
   </select>
-  <select id="selectByExample" parameterType="paradise.movie.app.model.MovieExample" resultMap="BaseResultMap">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from movie
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
+
+  <select id="getNewest" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM movie
+    WHERE `release` <![CDATA[ < ]]> now()
+    ORDER BY `release` DESC
+    LIMIT #{limit}
+    OFFSET #{offset}
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
-    select 
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from movie
-    where _id = #{id,jdbcType=INTEGER}
+
+  <select id="getComing" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM movie
+    WHERE `release` <![CDATA[ > ]]> now()
+    ORDER BY `release` ASC
+    LIMIT #{limit}
+    OFFSET #{offset}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from movie
-    where _id = #{id,jdbcType=INTEGER}
-  </delete>
-  <delete id="deleteByExample" parameterType="paradise.movie.app.model.MovieExample">
-    delete from movie
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="paradise.movie.app.model.Movie">
-    insert into movie (_id, imdb_id, title, 
-      title_en, `year`, `release`, 
-      poster, `path`, create_time, 
-      update_time, info, rating, 
-      recs, trailers, backdrops
-      )
-    values (#{id,jdbcType=INTEGER}, #{imdbId,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
-      #{titleEn,jdbcType=VARCHAR}, #{year,jdbcType=INTEGER}, #{release,jdbcType=TIMESTAMP}, 
-      #{poster,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{updateTime,jdbcType=TIMESTAMP}, #{info,jdbcType=LONGVARCHAR}, #{rating,jdbcType=LONGVARCHAR}, 
-      #{recs,jdbcType=LONGVARCHAR}, #{trailers,jdbcType=LONGVARCHAR}, #{backdrops,jdbcType=LONGVARCHAR}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="paradise.movie.app.model.Movie">
-    insert into movie
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        _id,
-      </if>
-      <if test="imdbId != null">
-        imdb_id,
-      </if>
-      <if test="title != null">
-        title,
-      </if>
-      <if test="titleEn != null">
-        title_en,
-      </if>
-      <if test="year != null">
-        `year`,
-      </if>
-      <if test="release != null">
-        `release`,
-      </if>
-      <if test="poster != null">
-        poster,
-      </if>
-      <if test="path != null">
-        `path`,
-      </if>
-      <if test="createTime != null">
-        create_time,
-      </if>
-      <if test="updateTime != null">
-        update_time,
-      </if>
-      <if test="info != null">
-        info,
-      </if>
-      <if test="rating != null">
-        rating,
-      </if>
-      <if test="recs != null">
-        recs,
-      </if>
-      <if test="trailers != null">
-        trailers,
-      </if>
-      <if test="backdrops != null">
-        backdrops,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="imdbId != null">
-        #{imdbId,jdbcType=VARCHAR},
-      </if>
-      <if test="title != null">
-        #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="titleEn != null">
-        #{titleEn,jdbcType=VARCHAR},
-      </if>
-      <if test="year != null">
-        #{year,jdbcType=INTEGER},
-      </if>
-      <if test="release != null">
-        #{release,jdbcType=TIMESTAMP},
-      </if>
-      <if test="poster != null">
-        #{poster,jdbcType=VARCHAR},
-      </if>
-      <if test="path != null">
-        #{path,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null">
-        #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="info != null">
-        #{info,jdbcType=LONGVARCHAR},
-      </if>
-      <if test="rating != null">
-        #{rating,jdbcType=LONGVARCHAR},
-      </if>
-      <if test="recs != null">
-        #{recs,jdbcType=LONGVARCHAR},
-      </if>
-      <if test="trailers != null">
-        #{trailers,jdbcType=LONGVARCHAR},
-      </if>
-      <if test="backdrops != null">
-        #{backdrops,jdbcType=LONGVARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="paradise.movie.app.model.MovieExample" resultType="java.lang.Long">
-    select count(*) from movie
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
+
+  <select id="search" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM movie
+    WHERE `title` LIKE CONCAT('%',#{keyword},'%')
+    LIMIT 15
   </select>
-  <update id="updateByExampleSelective" parameterType="map">
-    update movie
-    <set>
-      <if test="record.id != null">
-        _id = #{record.id,jdbcType=INTEGER},
-      </if>
-      <if test="record.imdbId != null">
-        imdb_id = #{record.imdbId,jdbcType=VARCHAR},
-      </if>
-      <if test="record.title != null">
-        title = #{record.title,jdbcType=VARCHAR},
-      </if>
-      <if test="record.titleEn != null">
-        title_en = #{record.titleEn,jdbcType=VARCHAR},
-      </if>
-      <if test="record.year != null">
-        `year` = #{record.year,jdbcType=INTEGER},
-      </if>
-      <if test="record.release != null">
-        `release` = #{record.release,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.poster != null">
-        poster = #{record.poster,jdbcType=VARCHAR},
-      </if>
-      <if test="record.path != null">
-        `path` = #{record.path,jdbcType=VARCHAR},
-      </if>
-      <if test="record.createTime != null">
-        create_time = #{record.createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.updateTime != null">
-        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.info != null">
-        info = #{record.info,jdbcType=LONGVARCHAR},
-      </if>
-      <if test="record.rating != null">
-        rating = #{record.rating,jdbcType=LONGVARCHAR},
-      </if>
-      <if test="record.recs != null">
-        recs = #{record.recs,jdbcType=LONGVARCHAR},
-      </if>
-      <if test="record.trailers != null">
-        trailers = #{record.trailers,jdbcType=LONGVARCHAR},
-      </if>
-      <if test="record.backdrops != null">
-        backdrops = #{record.backdrops,jdbcType=LONGVARCHAR},
-      </if>
-    </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExampleWithBLOBs" parameterType="map">
-    update movie
-    set _id = #{record.id,jdbcType=INTEGER},
-      imdb_id = #{record.imdbId,jdbcType=VARCHAR},
-      title = #{record.title,jdbcType=VARCHAR},
-      title_en = #{record.titleEn,jdbcType=VARCHAR},
-      `year` = #{record.year,jdbcType=INTEGER},
-      `release` = #{record.release,jdbcType=TIMESTAMP},
-      poster = #{record.poster,jdbcType=VARCHAR},
-      `path` = #{record.path,jdbcType=VARCHAR},
-      create_time = #{record.createTime,jdbcType=TIMESTAMP},
-      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
-      info = #{record.info,jdbcType=LONGVARCHAR},
-      rating = #{record.rating,jdbcType=LONGVARCHAR},
-      recs = #{record.recs,jdbcType=LONGVARCHAR},
-      trailers = #{record.trailers,jdbcType=LONGVARCHAR},
-      backdrops = #{record.backdrops,jdbcType=LONGVARCHAR}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map">
-    update movie
-    set _id = #{record.id,jdbcType=INTEGER},
-      imdb_id = #{record.imdbId,jdbcType=VARCHAR},
-      title = #{record.title,jdbcType=VARCHAR},
-      title_en = #{record.titleEn,jdbcType=VARCHAR},
-      `year` = #{record.year,jdbcType=INTEGER},
-      `release` = #{record.release,jdbcType=TIMESTAMP},
-      poster = #{record.poster,jdbcType=VARCHAR},
-      `path` = #{record.path,jdbcType=VARCHAR},
-      create_time = #{record.createTime,jdbcType=TIMESTAMP},
-      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="paradise.movie.app.model.Movie">
-    update movie
-    <set>
-      <if test="imdbId != null">
-        imdb_id = #{imdbId,jdbcType=VARCHAR},
-      </if>
-      <if test="title != null">
-        title = #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="titleEn != null">
-        title_en = #{titleEn,jdbcType=VARCHAR},
-      </if>
-      <if test="year != null">
-        `year` = #{year,jdbcType=INTEGER},
-      </if>
-      <if test="release != null">
-        `release` = #{release,jdbcType=TIMESTAMP},
-      </if>
-      <if test="poster != null">
-        poster = #{poster,jdbcType=VARCHAR},
-      </if>
-      <if test="path != null">
-        `path` = #{path,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null">
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null">
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="info != null">
-        info = #{info,jdbcType=LONGVARCHAR},
-      </if>
-      <if test="rating != null">
-        rating = #{rating,jdbcType=LONGVARCHAR},
-      </if>
-      <if test="recs != null">
-        recs = #{recs,jdbcType=LONGVARCHAR},
-      </if>
-      <if test="trailers != null">
-        trailers = #{trailers,jdbcType=LONGVARCHAR},
-      </if>
-      <if test="backdrops != null">
-        backdrops = #{backdrops,jdbcType=LONGVARCHAR},
-      </if>
-    </set>
-    where _id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="paradise.movie.app.model.Movie">
-    update movie
-    set imdb_id = #{imdbId,jdbcType=VARCHAR},
-      title = #{title,jdbcType=VARCHAR},
-      title_en = #{titleEn,jdbcType=VARCHAR},
-      `year` = #{year,jdbcType=INTEGER},
-      `release` = #{release,jdbcType=TIMESTAMP},
-      poster = #{poster,jdbcType=VARCHAR},
-      `path` = #{path,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP},
-      info = #{info,jdbcType=LONGVARCHAR},
-      rating = #{rating,jdbcType=LONGVARCHAR},
-      recs = #{recs,jdbcType=LONGVARCHAR},
-      trailers = #{trailers,jdbcType=LONGVARCHAR},
-      backdrops = #{backdrops,jdbcType=LONGVARCHAR}
-    where _id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="paradise.movie.app.model.Movie">
-    update movie
-    set imdb_id = #{imdbId,jdbcType=VARCHAR},
-      title = #{title,jdbcType=VARCHAR},
-      title_en = #{titleEn,jdbcType=VARCHAR},
-      `year` = #{year,jdbcType=INTEGER},
-      `release` = #{release,jdbcType=TIMESTAMP},
-      poster = #{poster,jdbcType=VARCHAR},
-      `path` = #{path,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP}
-    where _id = #{id,jdbcType=INTEGER}
-  </update>
+
+  <select id="findByPath" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM movie
+    WHERE `path` = #{path}
+  </select>
+
+  <select id="findByIds" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM movie
+    WHERE _id IN
+    <foreach collection="ids" item="_id" index="index" open="(" close=")" separator=",">
+      #{_id}
+    </foreach>
+  </select>
+
+  <select id="findByGenre" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM movie
+    WHERE _id IN(
+    SELECT t.id from(
+    SELECT movie_id as id FROM movie_genre WHERE
+    genre_id = (SELECT genre_id FROM genre WHERE name = #{genre})
+    LIMIT #{limit}
+    OFFSET #{offset}) AS t
+    )
+  </select>
+
+  <select id="findByActor" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM movie
+    WHERE _id IN(
+    SELECT t.id from(
+    SELECT movie_id as id FROM movie_actor WHERE
+    actor_id = (SELECT actor_id FROM actor WHERE name = #{actor})
+    LIMIT #{limit}
+    OFFSET #{offset}) AS t
+    )
+  </select>
 </mapper>

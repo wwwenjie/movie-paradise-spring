@@ -187,4 +187,25 @@ public class Movie {
     public void setBackdrops(String backdrops) {
         this.backdrops = backdrops == null ? null : backdrops.trim();
     }
+
+    @Override
+    public String toString() {
+        return "Movie{" +
+                "id=" + id +
+                ", imdbId='" + imdbId + '\'' +
+                ", title='" + title + '\'' +
+                ", titleEn='" + titleEn + '\'' +
+                ", year=" + year +
+                ", release=" + release +
+                ", poster='" + poster + '\'' +
+                ", path='" + path + '\'' +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                ", info='" + info + '\'' +
+                ", rating='" + rating + '\'' +
+                ", recs='" + recs + '\'' +
+                ", trailers='" + trailers + '\'' +
+                ", backdrops='" + backdrops + '\'' +
+                '}';
+    }
 }

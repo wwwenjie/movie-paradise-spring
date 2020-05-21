@@ -1,31 +1,34 @@
 package paradise.movie.app.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.stereotype.Service;
 import paradise.movie.app.model.Movie;
 
+import java.util.List;
+
 @Service
 public interface MovieService {
-    Movie[] getToday();
+    List<Movie> getToday() throws JsonProcessingException;
 
-    Movie[] getNewest();
+    List<Movie> getNewest(Integer limit, Integer offset);
 
-    Movie[] getComing();
+    List<Movie> getComing(Integer limit, Integer offset);
 
-    Movie[] search();
+    List<Movie> search(String keyword);
 
     Movie findByPath(String path);
 
-    Movie[] findByIds();
+    List<Movie> findByIds(String ids);
 
-    Movie[] findByGenre();
+    List<Movie> findByGenre(String genre, Integer limit, Integer offset);
 
-    Movie[] findByActor();
+    List<Movie> findByActor(String actor, Integer limit, Integer offset);
 
-    void update();
+    void update(Movie movie);
 
-    void create();
+    void create(Movie movie);
 
-    Movie handelGenre();
+    Movie handelGenre(Movie movie);
 
-    Movie handelActor();
+    Movie handelActor(Movie movie);
 }

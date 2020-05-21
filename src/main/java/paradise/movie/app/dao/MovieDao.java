@@ -1,36 +1,34 @@
 package paradise.movie.app.dao;
 
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Component;
 import paradise.movie.app.model.Movie;
-import paradise.movie.app.model.MovieExample;
 
+import java.util.List;
+
+@Component
 public interface MovieDao {
-    long countByExample(MovieExample example);
+    List<Movie> getToday();
 
-    int deleteByExample(MovieExample example);
+    List<Movie> getNewest(@Param("limit") Integer limit, @Param("offset") Integer offset);
 
-    int deleteByPrimaryKey(Integer id);
+    List<Movie> getComing(@Param("limit") Integer limit, @Param("offset") Integer offset);
 
-    int insert(Movie record);
+    List<Movie> search(@Param("keyword") String keyword);
 
-    int insertSelective(Movie record);
+    Movie findByPath(@Param("path") String path);
 
-    List<Movie> selectByExampleWithBLOBs(MovieExample example);
+    List<Movie> findByIds(@Param("ids") String[] ids);
 
-    List<Movie> selectByExample(MovieExample example);
+    List<Movie> findByGenre(@Param("genre") String genre, @Param("limit") Integer limit, @Param("offset") Integer offset);
 
-    Movie selectByPrimaryKey(Integer id);
+    List<Movie> findByActor(@Param("actor") String genre, @Param("limit") Integer limit, @Param("offset") Integer offset);
 
-    int updateByExampleSelective(@Param("record") Movie record, @Param("example") MovieExample example);
+    void update(Movie movie);
 
-    int updateByExampleWithBLOBs(@Param("record") Movie record, @Param("example") MovieExample example);
+    void create(Movie movie);
 
-    int updateByExample(@Param("record") Movie record, @Param("example") MovieExample example);
+    Movie handelGenre(Movie movie);
 
-    int updateByPrimaryKeySelective(Movie record);
-
-    int updateByPrimaryKeyWithBLOBs(Movie record);
-
-    int updateByPrimaryKey(Movie record);
+    Movie handelActor(Movie movie);
 }
