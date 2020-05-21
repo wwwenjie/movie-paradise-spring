@@ -7,9 +7,9 @@ import paradise.movie.app.service.MovieService;
 
 import java.util.List;
 
-@CrossOrigin("http://localhost:8080")
 @RestController
 @RequestMapping("/movies")
+@CrossOrigin(origins = {"http://localhost:8080", "https://movie.jinwenjie.me"})
 public class MovieController {
     private final MovieService movieService;
 

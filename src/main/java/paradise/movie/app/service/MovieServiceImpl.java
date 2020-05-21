@@ -1,8 +1,6 @@
 package paradise.movie.app.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.stereotype.Service;
 import paradise.movie.app.dao.MovieDao;
 import paradise.movie.app.model.Movie;
@@ -18,17 +16,15 @@ public class MovieServiceImpl implements MovieService {
         this.movieDao = movieDao;
     }
 
-    ObjectMapper json = new ObjectMapper();
-
     @Override
-    public List<Movie> getToday() throws JsonProcessingException {
+    public List<Movie> getToday() {
         List<Movie> movies = movieDao.getToday();
         List<Movie> qualifiedMovies = new ArrayList<>();
         for (Movie movie : movies) {
             if (movie.getRating() == null) continue;
-            JsonNode rootNode = json.readTree(movie.getRating());
-            double douban = rootNode.path("douban_score").asDouble();
-            double imdb = rootNode.path("imdb_score").asDouble();
+            JSONObject jsonObject = JSONObject.parseObject(movie.getRating());
+            double douban = jsonObject.getDoubleValue("douban_score");
+            double imdb = jsonObject.getDoubleValue("imdb_score");
             if (douban > 8.0 || imdb > 8.0) {
                 if (qualifiedMovies.size() == 10) break;
                 qualifiedMovies.add(movie);
