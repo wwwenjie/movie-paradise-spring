@@ -17,13 +17,20 @@ public class MovieController {
     }
 
     @GetMapping("")
-    public List<Movie> getMovies(
-            @RequestParam("genre") String genre,
-            @RequestParam("actor") String actor
-    ) {
-        System.out.println(genre);
-        System.out.println(actor);
-        return movieService.getComing(10, 0);
+    public List<Movie> getMovies(String genre, String actor, String ids, String keyword, Integer limit, Integer offset) {
+        if (keyword != null) {
+            return movieService.search(keyword);
+        }
+        if (ids != null) {
+            return movieService.findByIds(ids);
+        }
+        if (genre != null) {
+            return movieService.findByGenre(genre, limit, offset);
+        }
+        if (actor != null) {
+            return movieService.findByActor(actor, limit, offset);
+        }
+        return null;
     }
 
     @PutMapping("")
@@ -37,13 +44,13 @@ public class MovieController {
     }
 
     @GetMapping("/newest")
-    public List<Movie> getNewest() {
-        return movieService.getNewest(10, 0);
+    public List<Movie> getNewest(Integer limit, Integer offset) {
+        return movieService.getNewest(limit, offset);
     }
 
     @GetMapping("/coming")
-    public List<Movie> getComing() {
-        return movieService.getComing(10, 0);
+    public List<Movie> getComing(Integer limit, Integer offset) {
+        return movieService.getComing(limit, offset);
     }
 
     @GetMapping("/{path}")

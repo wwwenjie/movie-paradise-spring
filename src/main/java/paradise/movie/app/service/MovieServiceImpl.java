@@ -39,11 +39,15 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public List<Movie> getNewest(Integer limit, Integer offset) {
+        limit = limit == null ? 8 : limit;
+        offset = offset == null ? 0 : offset;
         return movieDao.getNewest(limit, offset);
     }
 
     @Override
     public List<Movie> getComing(Integer limit, Integer offset) {
+        limit = limit == null ? 8 : limit;
+        offset = offset == null ? 0 : offset;
         return movieDao.getComing(limit, offset);
     }
 
@@ -64,11 +68,15 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public List<Movie> findByGenre(String genre, Integer limit, Integer offset) {
+        limit = limit == null ? 8 : limit;
+        offset = offset == null ? 0 : offset;
         return movieDao.findByGenre(genre, limit, offset);
     }
 
     @Override
     public List<Movie> findByActor(String actor, Integer limit, Integer offset) {
+        limit = limit == null ? 8 : limit;
+        offset = offset == null ? 0 : offset;
         return movieDao.findByActor(actor, limit, offset);
     }
 
