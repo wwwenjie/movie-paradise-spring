@@ -7,6 +7,7 @@ import paradise.movie.app.service.MovieService;
 
 import java.util.List;
 
+@CrossOrigin("http://localhost:8080")
 @RestController
 @RequestMapping("/movies")
 public class MovieController {
@@ -31,11 +32,6 @@ public class MovieController {
             return movieService.findByActor(actor, limit, offset);
         }
         return null;
-    }
-
-    @PutMapping("")
-    public void updateMovie() {
-        movieService.update(new Movie());
     }
 
     @GetMapping("/today")
