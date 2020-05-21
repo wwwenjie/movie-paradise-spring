@@ -8,6 +8,11 @@ import paradise.movie.app.model.Movie;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 电影信息接口
+ * 功能均为函数字面意思
+ * 数据库不设置删除功能，update不允许更新 _id 字段
+ */
 @Service
 public class MovieServiceImpl implements MovieService {
     public final MovieDao movieDao;
@@ -47,6 +52,9 @@ public class MovieServiceImpl implements MovieService {
         return movieDao.getComing(limit, offset);
     }
 
+    /**
+     * 默认限制 15 条数，促使用户精确搜索
+     */
     @Override
     public List<Movie> search(String keyword) {
         return movieDao.search(keyword);
@@ -57,6 +65,9 @@ public class MovieServiceImpl implements MovieService {
         return movieDao.findByPath(path);
     }
 
+    /**
+     * @param ids：123456-123456-123456
+     */
     @Override
     public List<Movie> findByIds(String ids) {
         return movieDao.findByIds(ids.split("-"));
@@ -76,6 +87,9 @@ public class MovieServiceImpl implements MovieService {
         return movieDao.findByActor(actor, limit, offset);
     }
 
+    /**
+     * 非查询服务均为最低优先级，最后实现
+     */
     @Override
     public void update(Movie movie) {
 
@@ -86,6 +100,11 @@ public class MovieServiceImpl implements MovieService {
 
     }
 
+    /**
+     * 处理电影信息改动时对应修改关联表(数据库外键约束)
+     * movie_genre
+     * movie_actor
+     */
     @Override
     public Movie handelGenre(Movie movie) {
         return null;

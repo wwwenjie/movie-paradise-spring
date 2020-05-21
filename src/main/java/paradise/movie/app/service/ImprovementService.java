@@ -3,17 +3,21 @@ package paradise.movie.app.service;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.aliyun.oss.common.utils.IOUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import paradise.movie.app.model.Movie;
 import paradise.movie.app.util.OSS;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 
+/**
+ * 完善数据，大部分电影没有：
+ * 阿里云OSS的海报备份
+ * 数据库的 backdrops 字段
+ * 数据库的 trailers 字段
+ */
 @Service
 public class ImprovementService {
     final
