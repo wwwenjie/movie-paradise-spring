@@ -10,6 +10,9 @@ import paradise.movie.app.model.Movie;
 
 import java.util.List;
 
+/**
+ * test in test database
+ */
 class MovieServiceImplTest extends MovieParadiseApplicationTests {
     @Autowired
     MovieService movieService;
@@ -64,6 +67,14 @@ class MovieServiceImplTest extends MovieParadiseApplicationTests {
 
     @Test
     void update() {
+        Integer id = 1291543;
+        String title = "test title";
+        Movie movie = new Movie();
+        movie.set_id(id);
+        movie.setTitle(title);
+        movieService.update(movie);
+        List<Movie> updatedMovie = movieService.findByIds(id.toString());
+        Assert.assertEquals(title, updatedMovie.get(0).getTitle());
     }
 
     @Test

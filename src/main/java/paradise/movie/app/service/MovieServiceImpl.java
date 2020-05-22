@@ -90,9 +90,12 @@ public class MovieServiceImpl implements MovieService {
      */
     @Override
     public void update(Movie movie) {
-
+        movieDao.update(movie);
     }
 
+    /**
+     * @deprecated
+     */
     @Override
     public void create(Movie movie) {
 

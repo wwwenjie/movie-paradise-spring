@@ -103,4 +103,53 @@
     OFFSET #{offset}) AS t
     )
   </select>
+
+  <update id="update" parameterType="paradise.movie.app.model.Movie">
+    update movie
+    <set>
+      <if test="imdbId != null">
+        imdb_id = #{imdbId,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="titleEn != null">
+        title_en = #{titleEn,jdbcType=VARCHAR},
+      </if>
+      <if test="year != null">
+        `year` = #{year,jdbcType=INTEGER},
+      </if>
+      <if test="release != null">
+        `release` = #{release,jdbcType=TIMESTAMP},
+      </if>
+      <if test="poster != null">
+        poster = #{poster,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null">
+        `path` = #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="info != null">
+        info = #{info,jdbcType=LONGVARCHAR,typeHandler=paradise.movie.app.util.JSONObejectHandler},
+      </if>
+      <if test="rating != null">
+        rating = #{rating,jdbcType=LONGVARCHAR,typeHandler=paradise.movie.app.util.JSONObejectHandler},
+      </if>
+      <if test="recs != null">
+        recs = #{recs,jdbcType=LONGVARCHAR,typeHandler=paradise.movie.app.util.JSONArrayHandler},
+      </if>
+      <if test="trailers != null">
+        trailers = #{trailers,jdbcType=LONGVARCHAR,typeHandler=paradise.movie.app.util.JSONArrayHandler},
+      </if>
+      <if test="backdrops != null">
+        backdrops = #{backdrops,jdbcType=LONGVARCHAR,typeHandler=paradise.movie.app.util.JSONArrayHandler},
+      </if>
+    </set>
+    where _id = #{_id,jdbcType=INTEGER}
+  </update>
 </mapper>

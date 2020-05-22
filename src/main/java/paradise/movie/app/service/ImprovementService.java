@@ -36,20 +36,20 @@ public class ImprovementService {
         JSONObject jsonObject = JSONObject.parseObject(IOUtils.readStreamAsString(inputStream, "utf-8"));
         JSONArray backdrops = jsonObject.getJSONArray("backdrops");
         backdrops = backdrops == null ? JSONObject.parseArray("[]") : backdrops;
-        // todo: update service
-        // Movie movie = new Movie();
-        // movie.setBackdrops(backdrops);
-        //movieService.update(movie);
+        Movie movie = new Movie();
+        movie.set_id((Integer) jsonObject.get("_id"));
+        movie.setBackdrops(backdrops);
+        movieService.update(movie);
     }
 
     public JSONArray patchTrailers(Integer id) throws IOException {
         InputStream inputStream = new URL("https://api.dianying.fm/trailers/" + id.toString()).openStream();
         // trailers will return [] if its null
         JSONArray trailers = JSONArray.parseArray(IOUtils.readStreamAsString(inputStream, "utf-8"));
-        // todo: update service
-        // Movie movie = new Movie();
-        // movie.setTrailers(trailers);
-        // movieService.update(movie);
+        Movie movie = new Movie();
+        movie.set_id(id);
+        movie.setTrailers(trailers);
+        movieService.update(movie);
         return trailers;
     }
 }
