@@ -1,5 +1,8 @@
 package paradise.movie.app.model;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+
 import java.util.Date;
 
 public class Movie {
@@ -23,15 +26,15 @@ public class Movie {
 
     private Date updateTime;
 
-    private String info;
+    private JSONObject info;
 
-    private String rating;
+    private JSONObject rating;
 
-    private String recs;
+    private JSONArray recs;
 
-    private String trailers;
+    private JSONArray trailers;
 
-    private String backdrops;
+    private JSONArray backdrops;
 
     public Movie(Integer id, String imdbId, String title, String titleEn, Integer year, Date release, String poster, String path, Date createTime, Date updateTime) {
         this.id = id;
@@ -46,7 +49,7 @@ public class Movie {
         this.updateTime = updateTime;
     }
 
-    public Movie(Integer id, String imdbId, String title, String titleEn, Integer year, Date release, String poster, String path, Date createTime, Date updateTime, String info, String rating, String recs, String trailers, String backdrops) {
+    public Movie(Integer id, String imdbId, String title, String titleEn, Integer year, Date release, String poster, String path, Date createTime, Date updateTime, JSONObject info, JSONObject rating, JSONArray recs, JSONArray trailers, JSONArray backdrops) {
         this.id = id;
         this.imdbId = imdbId;
         this.title = title;
@@ -148,44 +151,44 @@ public class Movie {
         this.updateTime = updateTime;
     }
 
-    public String getInfo() {
+    public JSONObject getInfo() {
         return info;
     }
 
-    public void setInfo(String info) {
-        this.info = info == null ? null : info.trim();
+    public void setInfo(JSONObject info) {
+        this.info = info;
     }
 
-    public String getRating() {
+    public JSONObject getRating() {
         return rating;
     }
 
-    public void setRating(String rating) {
-        this.rating = rating == null ? null : rating.trim();
+    public void setRating(JSONObject rating) {
+        this.rating = rating;
     }
 
-    public String getRecs() {
+    public JSONArray getRecs() {
         return recs;
     }
 
-    public void setRecs(String recs) {
-        this.recs = recs == null ? null : recs.trim();
+    public void setRecs(JSONArray recs) {
+        this.recs = recs;
     }
 
-    public String getTrailers() {
+    public JSONArray getTrailers() {
         return trailers;
     }
 
-    public void setTrailers(String trailers) {
-        this.trailers = trailers == null ? null : trailers.trim();
+    public void setTrailers(JSONArray trailers) {
+        this.trailers = trailers;
     }
 
-    public String getBackdrops() {
+    public JSONArray getBackdrops() {
         return backdrops;
     }
 
-    public void setBackdrops(String backdrops) {
-        this.backdrops = backdrops == null ? null : backdrops.trim();
+    public void setBackdrops(JSONArray backdrops) {
+        this.backdrops = backdrops;
     }
 
     @Override

@@ -13,11 +13,11 @@
       <arg column="path" javaType="java.lang.String" jdbcType="VARCHAR"/>
       <arg column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
       <arg column="update_time" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
-      <arg column="info" javaType="java.lang.String" jdbcType="LONGVARCHAR"/>
-      <arg column="rating" javaType="java.lang.String" jdbcType="LONGVARCHAR"/>
-      <arg column="recs" javaType="java.lang.String" jdbcType="LONGVARCHAR"/>
-      <arg column="trailers" javaType="java.lang.String" jdbcType="LONGVARCHAR"/>
-      <arg column="backdrops" javaType="java.lang.String" jdbcType="LONGVARCHAR"/>
+      <arg column="info" javaType="com.alibaba.fastjson.JSONObject" typeHandler="paradise.movie.app.util.JSONObjectHandler" jdbcType="LONGVARCHAR"/>
+      <arg column="rating" javaType="com.alibaba.fastjson.JSONObject" typeHandler="paradise.movie.app.util.JSONObjectHandler" jdbcType="LONGVARCHAR"/>
+      <arg column="recs" javaType="com.alibaba.fastjson.JSONArray" typeHandler="paradise.movie.app.util.JSONArrayHandler" jdbcType="LONGVARCHAR"/>
+      <arg column="trailers" javaType="com.alibaba.fastjson.JSONArray" typeHandler="paradise.movie.app.util.JSONArrayHandler" jdbcType="LONGVARCHAR"/>
+      <arg column="backdrops" javaType="com.alibaba.fastjson.JSONArray" typeHandler="paradise.movie.app.util.JSONArrayHandler" jdbcType="LONGVARCHAR"/>
     </constructor>
   </resultMap>
   <sql id="Base_Column_List">

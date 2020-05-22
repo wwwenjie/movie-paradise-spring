@@ -27,9 +27,8 @@ public class MovieServiceImpl implements MovieService {
         List<Movie> qualifiedMovies = new ArrayList<>();
         for (Movie movie : movies) {
             if (movie.getRating() == null) continue;
-            JSONObject jsonObject = JSONObject.parseObject(movie.getRating());
-            double douban = jsonObject.getDoubleValue("douban_score");
-            double imdb = jsonObject.getDoubleValue("imdb_score");
+            double douban = movie.getRating().getDoubleValue("douban_score");
+            double imdb = movie.getRating().getDoubleValue("imdb_score");
             if (douban > 8.0 || imdb > 8.0) {
                 if (qualifiedMovies.size() == 10) break;
                 qualifiedMovies.add(movie);

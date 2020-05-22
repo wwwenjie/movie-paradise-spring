@@ -18,6 +18,7 @@ public class OSS {
         OSSClient ossClient = new OSSClient(endpoint, accessKeyId, accessKeySecret);
         InputStream inputStream = new URL(api + id.toString()).openStream();
         ossClient.putObject(bucketName, "poster/" + id.toString() + extend, inputStream);
+        System.out.println("Add poster: " + "https://" + bucketName + "." + endpoint + "/poster/" + id.toString() + extend + " OK");
         ossClient.shutdown();
         // todo: backup in local
     }
