@@ -18,8 +18,7 @@ public class ImprovementController {
     }
 
     @PatchMapping("/poster")
-    // todo: global error handle
-    public JSONObject patchPoster(@RequestBody JSONObject data) throws IOException {
+    public JSONObject patchPoster(@RequestBody JSONObject data) {
         improvementService.patchPoster((Integer) data.get("id"));
         // todo: json util
         return new JSONObject();

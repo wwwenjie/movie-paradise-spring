@@ -2,6 +2,8 @@ package paradise.movie.app.service;
 
 import org.springframework.stereotype.Service;
 import paradise.movie.app.dao.MovieDao;
+import paradise.movie.app.errorhandle.CustomException;
+import paradise.movie.app.errorhandle.ExceptionEnum;
 import paradise.movie.app.model.Movie;
 
 import java.util.ArrayList;
@@ -60,7 +62,11 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public Movie findByPath(String path) {
-        return movieDao.findByPath(path);
+        Movie movie = movieDao.findByPath(path);
+        if (movie == null) {
+            throw new CustomException(ExceptionEnum.MOVIE_NOT_FOUND);
+        }
+        return movie;
     }
 
     /**

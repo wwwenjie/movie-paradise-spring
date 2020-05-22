@@ -2,6 +2,8 @@ package paradise.movie.app.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.web.bind.annotation.*;
+import paradise.movie.app.errorhandle.CustomException;
+import paradise.movie.app.errorhandle.ExceptionEnum;
 import paradise.movie.app.model.Movie;
 import paradise.movie.app.service.MovieService;
 
@@ -31,7 +33,7 @@ public class MovieController {
         if (actor != null) {
             return movieService.findByActor(actor, limit, offset);
         }
-        return null;
+        throw new CustomException(ExceptionEnum.PARAMS_ERROR);
     }
 
     @GetMapping("/today")
