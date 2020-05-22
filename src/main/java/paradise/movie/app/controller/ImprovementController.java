@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.web.bind.annotation.*;
 import paradise.movie.app.service.ImprovementService;
+import paradise.movie.app.util.JSONResult;
 
 import java.io.IOException;
 
@@ -18,16 +19,15 @@ public class ImprovementController {
     }
 
     @PatchMapping("/poster")
-    public JSONObject patchPoster(@RequestBody JSONObject data) {
+    public JSONObject patchPoster(@RequestBody JSONObject data) throws IOException {
         improvementService.patchPoster((Integer) data.get("id"));
-        // todo: json util
-        return new JSONObject();
+        return JSONResult.thanks();
     }
 
     @PatchMapping("/backdrops")
     public JSONObject patchBackdrops(@RequestBody JSONObject data) throws IOException {
         improvementService.patchBackdrops((String) data.get("path"));
-        return new JSONObject();
+        return JSONResult.thanks();
     }
 
     @PatchMapping("/trailers")
