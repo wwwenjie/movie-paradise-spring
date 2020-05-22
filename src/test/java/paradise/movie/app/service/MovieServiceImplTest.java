@@ -49,7 +49,7 @@ class MovieServiceImplTest extends MovieParadiseApplicationTests {
     void findByIds() {
         Integer id = 30299356;
         List<Movie> movies = movieService.findByIds("25964071-30299356");
-        Assert.assertEquals(id, movies.get(1).getId());
+        Assert.assertEquals(id, movies.get(1).get_id());
     }
 
     @Test

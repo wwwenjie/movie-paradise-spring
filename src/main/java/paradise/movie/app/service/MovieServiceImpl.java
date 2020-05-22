@@ -1,6 +1,5 @@
 package paradise.movie.app.service;
 
-import com.alibaba.fastjson.JSONObject;
 import org.springframework.stereotype.Service;
 import paradise.movie.app.dao.MovieDao;
 import paradise.movie.app.model.Movie;

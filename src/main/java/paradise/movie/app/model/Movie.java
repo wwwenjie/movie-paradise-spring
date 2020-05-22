@@ -6,7 +6,7 @@ import com.alibaba.fastjson.JSONObject;
 import java.util.Date;
 
 public class Movie {
-    private Integer id;
+    private Integer _id;
 
     private String imdbId;
 
@@ -36,8 +36,8 @@ public class Movie {
 
     private JSONArray backdrops;
 
-    public Movie(Integer id, String imdbId, String title, String titleEn, Integer year, Date release, String poster, String path, Date createTime, Date updateTime) {
-        this.id = id;
+    public Movie(Integer _id, String imdbId, String title, String titleEn, Integer year, Date release, String poster, String path, Date createTime, Date updateTime) {
+        this._id = _id;
         this.imdbId = imdbId;
         this.title = title;
         this.titleEn = titleEn;
@@ -49,8 +49,8 @@ public class Movie {
         this.updateTime = updateTime;
     }
 
-    public Movie(Integer id, String imdbId, String title, String titleEn, Integer year, Date release, String poster, String path, Date createTime, Date updateTime, JSONObject info, JSONObject rating, JSONArray recs, JSONArray trailers, JSONArray backdrops) {
-        this.id = id;
+    public Movie(Integer _id, String imdbId, String title, String titleEn, Integer year, Date release, String poster, String path, Date createTime, Date updateTime, JSONObject info, JSONObject rating, JSONArray recs, JSONArray trailers, JSONArray backdrops) {
+        this._id = _id;
         this.imdbId = imdbId;
         this.title = title;
         this.titleEn = titleEn;
@@ -71,12 +71,12 @@ public class Movie {
         super();
     }
 
-    public Integer getId() {
-        return id;
+    public Integer get_id() {
+        return _id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void set_id(Integer _id) {
+        this._id = _id;
     }
 
     public String getImdbId() {
@@ -194,7 +194,7 @@ public class Movie {
     @Override
     public String toString() {
         return "Movie{" +
-                "id=" + id +
+                "id=" + _id +
                 ", imdbId='" + imdbId + '\'' +
                 ", title='" + title + '\'' +
                 ", titleEn='" + titleEn + '\'' +

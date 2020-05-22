@@ -1,12 +1,11 @@
 package paradise.movie.app.controller;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import paradise.movie.app.service.ImprovementService;
 
 import java.io.IOException;
-
 
 @RestController
 @RequestMapping("/movies")
@@ -20,21 +19,20 @@ public class ImprovementController {
 
     @PatchMapping("/poster")
     // todo: global error handle
-    public JSONObject patchPoster(@RequestParam("id") Integer id) throws IOException {
-        improvementService.patchPoster(id);
+    public JSONObject patchPoster(@RequestBody JSONObject data) throws IOException {
+        improvementService.patchPoster((Integer) data.get("id"));
         // todo: json util
         return new JSONObject();
     }
 
     @PatchMapping("/backdrops")
-    public JSONObject patchBackdrops(@RequestParam("path") String path) throws IOException {
-        improvementService.patchBackdrops(path);
+    public JSONObject patchBackdrops(@RequestBody JSONObject data) throws IOException {
+        improvementService.patchBackdrops((String) data.get("path"));
         return new JSONObject();
     }
 
     @PatchMapping("/trailers")
-    public JSONObject patchTrailers(@RequestParam("id") Integer id) throws IOException {
-        improvementService.patchTrailers(id);
-        return new JSONObject();
+    public JSONArray patchTrailers(@RequestBody JSONObject data) throws IOException {
+        return improvementService.patchTrailers((Integer) data.get("id"));
     }
 }
